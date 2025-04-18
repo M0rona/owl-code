@@ -21,8 +21,6 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // TODO: Verificar o por que a sessão náo idenfica login
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);

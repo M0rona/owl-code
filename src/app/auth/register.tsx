@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { AuthLayout } from "./components/authLayout";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/config/firebase";
@@ -11,6 +11,8 @@ import { Loader2 } from "lucide-react";
 
 export function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -32,6 +34,7 @@ export function RegisterPage() {
         });
 
         toast.success("Cadastro realizado com sucesso!");
+        navigate("/dashboard");
       })
       .catch((error: FirebaseError) => {
         toast.error("Erro ao criar usuário: " + error.message);
@@ -55,10 +58,6 @@ export function RegisterPage() {
         name="confirmPassword"
         required
       />
-
-      <Button variant="link" className="w-fit px-0">
-        Esqueci minha senha
-      </Button>
 
       <Button type="submit" size="lg">
         {isLoading ? <Loader2 className="animate-spin" /> : "Registrar"}
