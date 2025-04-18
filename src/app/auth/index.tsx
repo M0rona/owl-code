@@ -20,9 +20,7 @@ export function LoginPage() {
 
     setIsLoading(true);
     await signInWithEmailAndPassword(auth, email, password)
-      .then((credentials) => {
-        console.log(credentials);
-
+      .then(() => {
         toast.success("Login realizado com sucesso!");
       })
       .catch((error: FirebaseError) => {
