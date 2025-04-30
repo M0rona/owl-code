@@ -32,6 +32,7 @@ export function LoginPage() {
         navigate("/dashboard");
       })
       .catch((error: FirebaseError) => {
+        console.error("Erro ao fazer login:", error);
         toast.error(translateFirebaseError(error));
       });
 

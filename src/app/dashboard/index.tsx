@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { auth, db } from "@/config/firebase";
-import { signOut } from "firebase/auth";
-import { LogOut } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-// import { getColletions } from "@/service/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/contexts/auth";
+import { PlusIcon } from "lucide-react";
+import { getJornadasByUserId } from "./service/jornadas";
+import { LinguageCard } from "./components/linguageCard";
 
 export function DashboardPage() {
   const { currentUser } = useAuthContext();
@@ -14,30 +12,38 @@ export function DashboardPage() {
   //   queryFn: async () => await getColletions("linguagens"),
   // });
 
-  const { data } = useQuery({
+  const jornadas = useQuery({
     queryKey: ["jornadas"],
-    queryFn: async () => {
-      const col = collection(db, "jornadas");
-      const q = query(col, where("user_id", "==", currentUser?.uid));
-      return (await getDocs(q)).docs.map((doc) => ({
-        uid: doc.id,
-        ...doc.data(),
-      }));
-    },
+    queryFn: async () => await getJornadasByUserId(),
   });
 
-  console.log(data);
-
   return (
-    <div className="size-full">
-      <header className="p-2 pr-8 flex justify-between items-center">
-        <img src="./mascote.png" className="size-24" />
+    <>
+      <section className="mt-16 flex items-center justify-between">
+        <div className="flex gap-5 items-center">
+          <img
+            src={
+              currentUser?.photoURL ||
+              `https://ui-avatars.com/api/?name=${currentUser?.displayName}&background=292524&color=fff`
+            }
+            alt="User avatar"
+            className="size-16 rounded-full"
+          />
 
-        <Button size="lg" onClick={() => signOut(auth)}>
-          Sair
-          <LogOut />
+          <h3>Bem vindo aos seus estudos, {currentUser?.displayName}</h3>
+        </div>
+
+        <Button size="lg">
+          <PlusIcon />
+          Adicionar jornada
         </Button>
-      </header>
-    </div>
+      </section>
+
+      <section className="flex flex-wrap gap-5 mt-10 justify-center">
+        {jornadas.data?.map((jornada) => (
+          <LinguageCard key={jornada.uid} data={jornada} />
+        ))}
+      </section>
+    </>
   );
 }

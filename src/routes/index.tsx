@@ -4,6 +4,7 @@ import { RegisterPage } from "../app/auth/register";
 import { AuthGuard } from "./guard";
 import { DashboardPage } from "@/app/dashboard";
 import { Redirect } from "@/app";
+import { PrivateLayout } from "@/components/layout/privateLayout";
 
 export function AppRoutes() {
   return (
@@ -15,7 +16,9 @@ export function AppRoutes() {
 
         {/* Private routes */}
         <Route element={<AuthGuard />}>
-          <Route element={<DashboardPage />} path="/dashboard" />
+          <Route element={<PrivateLayout />}>
+            <Route element={<DashboardPage />} path="/dashboard" />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

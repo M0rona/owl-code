@@ -18,7 +18,8 @@ export function useAuthContext() {
 }
 
 export function AuthProvider({ children }: React.PropsWithChildren) {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] =
+    useState<AuthContextType["currentUser"]>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
