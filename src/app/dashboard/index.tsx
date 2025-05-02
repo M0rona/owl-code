@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/contexts/auth";
-import { PlusIcon } from "lucide-react";
 import { getJornadasByUserId } from "./service/jornadas";
 import { LinguageCard } from "./components/linguageCard";
+import { AddJourney } from "./components/addJourney";
 
 export function DashboardPage() {
   const { currentUser } = useAuthContext();
@@ -33,10 +32,7 @@ export function DashboardPage() {
           <h3>Bem vindo aos seus estudos, {currentUser?.displayName}</h3>
         </div>
 
-        <Button size="lg">
-          <PlusIcon />
-          Adicionar jornada
-        </Button>
+        <AddJourney />
       </section>
 
       <section className="flex flex-wrap gap-5 mt-10 justify-center">

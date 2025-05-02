@@ -65,6 +65,7 @@ export function RegisterPage() {
       </div>
 
       <Input
+        placeholder="Link da foto de perfil"
         type="text"
         name="profilePhotoLink"
         onChange={(e) => setImageUrl(e.target.value)}

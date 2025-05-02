@@ -1,0 +1,139 @@
+{
+    "jornadas": [
+        {
+            "uid": "lang-1",
+            "linguagem": {
+                "cor": "#ffff00",
+                "nome": "JavaScript",
+                "url": "https://2ality.com/2011/10/logo-js/js.jpg"
+            },
+            "progresso_percent": 75
+        },
+        {
+            "uid": "lang-2",
+            "linguagem": {
+                "cor": "#3178c6",
+                "nome": "TypeScript",
+                "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
+            },
+            "progresso_percent": 60
+        },
+        {
+            "uid": "lang-3",
+            "linguagem": {
+                "cor": "#61dafb",
+                "nome": "React",
+                "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+            },
+            "progresso_percent": 45
+        },
+        {
+            "uid": "lang-4",
+            "linguagem": {
+                "cor": "#339933",
+                "nome": "Node.js",
+                "url": "https://nodejs.org/static/images/logo.svg"
+            },
+            "progresso_percent": 80
+        },
+        {
+            "uid": "lang-5",
+            "linguagem": {
+                "cor": "#4B8BBE",
+                "nome": "Python",
+                "url": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngteam.com%2Fimages%2Fpython-logo-png-1024x1024_7d6af8d1_transparent_2023e8.png.png&f=1&nofb=1&ipt=0bdf63f9293fbefeccbcd3ca15802c88c35b6a7f6970ee56f783e7db9834779b"
+            },
+            "progresso_percent": 65
+        },
+        {
+            "uid": "lang-6",
+            "linguagem": {
+                "cor": "#FF4500",
+                "nome": "Rust",
+                "url": "https://www.rust-lang.org/logos/rust-logo-512x512.png"
+            },
+            "progresso_percent": 30
+        },
+        {
+            "uid": "lang-7",
+            "linguagem": {
+                "cor": "#F05032",
+                "nome": "Git",
+                "url": "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png"
+            },
+            "progresso_percent": 85
+        },
+        {
+            "uid": "lang-8",
+            "linguagem": {
+                "cor": "#007ACC",
+                "nome": "Visual Studio Code",
+                "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg"
+            },
+            "progresso_percent": 70
+        },
+        {
+            "uid": "lang-9",
+            "linguagem": {
+                "cor": "#E34F26",
+                "nome": "HTML5",
+                "url": "https://www.w3.org/html/logo/badge/html5-badge-h-solo.png"
+            },
+            "progresso_percent": 90
+        },
+        {
+            "uid": "lang-10",
+            "linguagem": {
+                "cor": "#1572B6",
+                "nome": "CSS3",
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/800px-CSS3_logo.svg.png"
+            },
+            "progresso_percent": 75
+        },
+        {
+            "uid": "lang-11",
+            "linguagem": {
+                "cor": "#00ADD8",
+                "nome": "Go",
+                "url": "https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png"
+            },
+            "progresso_percent": 40
+        },
+        {
+            "uid": "lang-12",
+            "linguagem": {
+                "cor": "#F7DF1E",
+                "nome": "Vue.js",
+                "url": "https://vuejs.org/images/logo.png"
+            },
+            "progresso_percent": 55
+        },
+        {
+            "uid": "lang-13",
+            "linguagem": {
+                "cor": "#FF6C37",
+                "nome": "Postman",
+                "url": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F62cc1b3a150d5de9a3dad5f7.png&f=1&nofb=1&ipt=dd29cbffa2975392bab5527357dc1a294e7ef6095991e9ac0a3d6375810f43a4"
+            },
+            "progresso_percent": 65
+        },
+        {
+            "uid": "lang-14",
+            "linguagem": {
+                "cor": "#2496ED",
+                "nome": "Docker",
+                "url": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flogos-world.net%2Fwp-content%2Fuploads%2F2021%2F02%2FDocker-Emblem.png&f=1&nofb=1&ipt=efd4637c3360ded1424ed8dcd6ec0f262c56d4b48e04ba42dca9aa6975eef0e3"
+            },
+            "progresso_percent": 50
+        },
+        {
+            "uid": "lang-15",
+            "linguagem": {
+                "cor": "#764ABC",
+                "nome": "Redux",
+                "url": "https://redux.js.org/img/redux.svg"
+            },
+            "progresso_percent": 45
+        }
+    ]
+}
