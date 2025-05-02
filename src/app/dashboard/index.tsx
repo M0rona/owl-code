@@ -3,15 +3,12 @@ import { useAuthContext } from "@/contexts/auth";
 import { getJornadasByUserId } from "./service/jornadas";
 import { LinguageCard } from "./components/linguageCard";
 import { AddJourney } from "./components/addJourney";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function DashboardPage() {
   const { currentUser } = useAuthContext();
-  // const { data } = useQuery({
-  //   queryKey: ["linguagens"],
-  //   queryFn: async () => await getColletions("linguagens"),
-  // });
 
-  const jornadas = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["jornadas"],
     queryFn: async () => await getJornadasByUserId(),
   });
@@ -35,10 +32,14 @@ export function DashboardPage() {
         <AddJourney />
       </section>
 
-      <section className="flex flex-wrap gap-5 mt-10 justify-center">
-        {jornadas.data?.map((jornada) => (
-          <LinguageCard key={jornada.uid} data={jornada} />
-        ))}
+      <section className="flex flex-wrap gap-5 mt-10 justify-center pb-10">
+        {isLoading
+          ? Array.from({ length: 9 }).map(() => (
+              <Skeleton className="w-card h-56 rounded-lg" />
+            ))
+          : data?.map((jornada) => (
+              <LinguageCard key={jornada.uid} data={jornada} />
+            ))}
       </section>
     </>
   );

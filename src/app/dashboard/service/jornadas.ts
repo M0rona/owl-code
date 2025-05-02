@@ -11,3 +11,15 @@ export async function getJornadasByUserId() {
       toast.error("Erro em buscar jornadas");
     });
 }
+
+export async function newJornada(uidLinguagem: string) {
+  return api
+    .post("jornadas", {
+      uidLinguagem,
+    })
+    .then(() => toast.success("Jornada criada com sucesso!"))
+    .catch((error) => {
+      console.error("Erro ao adicionar uma nova jornada", error);
+      toast.error("Erro ao adicionar uma nova jornada");
+    });
+}

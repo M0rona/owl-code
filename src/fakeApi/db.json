@@ -135,5 +135,67 @@
             },
             "progresso_percent": 45
         }
+    ],
+    "linguagens": [
+        {
+            "uid": "lang-1",
+            "nome": "JavaScript",
+            "cor": "#F7DF1E",
+            "url": "https://2ality.com/2011/10/logo-js/js.jpg"
+        },
+        {
+            "uid": "lang-2",
+            "nome": "Go",
+            "cor": "#00ADD8",
+            "url": "https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png"
+        },
+        {
+            "uid": "lang-3",
+            "nome": "Vue.js",
+            "cor": "#F7DF1E",
+            "url": "https://vuejs.org/images/logo.png"
+        },
+        {
+            "uid": "lang-4",
+            "nome": "Postman",
+            "cor": "#FF6C37",
+            "url": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F62cc1b3a150d5de9a3dad5f7.png&f=1&nofb=1&ipt=dd29cbffa2975392bab5527357dc1a294e7ef6095991e9ac0a3d6375810f43a4"
+        },
+        {
+            "uid": "lang-5",
+            "nome": "Docker",
+            "cor": "#2496ED",
+            "url": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flogos-world.net%2Fwp-content%2Fuploads%2F2021%2F02%2FDocker-Emblem.png&f=1&nofb=1&ipt=efd4637c3360ded1424ed8dcd6ec0f262c56d4b48e04ba42dca9aa6975eef0e3"
+        },
+        {
+            "uid": "lang-6",
+            "nome": "Redux",
+            "cor": "#764ABC",
+            "url": "https://redux.js.org/img/redux.svg"
+        },
+        {
+            "uid": "lang-7",
+            "nome": "JavaScript",
+            "cor": "#F7DF1E",
+            "url": "https://2ality.com/2011/10/logo-js/js.jpg"
+        },
+        {
+            "uid": "lang-8",
+            "nome": "Go",
+            "cor": "#00ADD8",
+            "url": "https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png"
+        },
+        {
+            "uid": "lang-9",
+            "nome": "Vue.js",
+            "cor": "#F7DF1E",
+            "url": "https://vuejs.org/images/logo.png"
+        },
+        {
+            "uid": "lang-10",
+            "nome": "Postman",
+            "cor": "#FF6C37",
+            "url": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F62cc1b3a150d5de9a3dad5f7.png&f=1&nofb=1&ipt=dd29cbffa2975392bab5527357dc1a294e7ef6095991e9ac0a3d6375810f43a4"
+        }
     ]
 }
