@@ -34,8 +34,8 @@ export function DashboardPage() {
 
       <section className="flex flex-wrap gap-5 justify-center pb-10">
         {isLoading
-          ? Array.from({ length: 9 }).map(() => (
-              <Skeleton className="w-card h-56 rounded-lg" />
+          ? Array.from({ length: 9 }).map((_, index) => (
+              <Skeleton key={index} className="w-card h-56 rounded-lg" />
             ))
           : data?.map((jornada) => (
               <LinguageCard key={jornada.uid} data={jornada} />
