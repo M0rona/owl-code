@@ -197,5 +197,199 @@
             "cor": "#FF6C37",
             "url": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F62cc1b3a150d5de9a3dad5f7.png&f=1&nofb=1&ipt=dd29cbffa2975392bab5527357dc1a294e7ef6095991e9ac0a3d6375810f43a4"
         }
+    ],
+    "conteudoJornada": [
+        {
+            "uid": "lang-1",
+            "jornada": {
+                "linguagem": {
+                    "cor": "#ffff00",
+                    "nome": "JavaScript",
+                    "url": "https://2ality.com/2011/10/logo-js/js.jpg"
+                },
+                "progresso_percent": 75
+            },
+            "roadmap": [
+                {
+                    "uid": "roadmap-1",
+                    "title": "Introdução ao JavaScript",
+                    "concluido": false,
+                    "subtopicos": [
+                        {
+                            "title": "O que é JavaScript?",
+                            "concluido": true,
+                            "conteudo": [
+                                {
+                                    "topico": "O que é JavaScript, por que foi criado?",
+                                    "detalhes": "JavaScript é uma linguagem de programação que foi criada para adicionar interatividade às páginas da web. Ela foi criada por Brendan Eich em 1995 e é uma das principais linguagens usadas no desenvolvimento web.",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Link para o site oficial do JavaScript",
+                                            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Introduction"
+                                        },
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "História e evolução do JavaScript",
+                                            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/A_re-introduction_to_JavaScript"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Sintaxe básica",
+                            "concluido": false,
+                            "conteudo": [
+                                {
+                                    "topico": "Variáveis e tipos de dados",
+                                    "detalhes": "Aprenda sobre declaração de variáveis (var, let, const) e os tipos de dados básicos em JavaScript (number, string, boolean, null, undefined, object).",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Guia de variáveis e tipos de dados",
+                                            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Grammar_and_types"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Estruturas de controle",
+                            "concluido": false,
+                            "conteudo": [
+                                {
+                                    "topico": "Condicionais e loops",
+                                    "detalhes": "Explore as estruturas de controle como if/else, switch, for, while, e do...while para controlar o fluxo do seu código.",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Estruturas de controle em JavaScript",
+                                            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Control_flow_and_error_handling"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Funções",
+                            "concluido": false,
+                            "conteudo": [
+                                {
+                                    "topico": "Declaração e uso de funções",
+                                    "detalhes": "Aprenda a criar e usar funções, incluindo funções anônimas, arrow functions e métodos de objetos.",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Guia de funções em JavaScript",
+                                            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Functions"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Manipulação do DOM",
+                            "concluido": false,
+                            "conteudo": [
+                                {
+                                    "topico": "Interagindo com elementos HTML",
+                                    "detalhes": "Entenda como selecionar, modificar e criar elementos HTML dinamicamente usando JavaScript.",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Introdução ao DOM",
+                                            "url": "https://developer.mozilla.org/pt-BR/docs/Web/API/Document_Object_Model/Introduction"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "uid": "roadmap-2",
+                    "title": "JavaScript Avançado",
+                    "concluido": false,
+                    "subtopicos": [
+                        {
+                            "title": "Programação Orientada a Objetos",
+                            "concluido": false,
+                            "conteudo": [
+                                {
+                                    "topico": "Classes e Objetos",
+                                    "detalhes": "Aprenda sobre a criação e uso de classes, herança, encapsulamento e polimorfismo em JavaScript.",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Introdução à POO em JavaScript",
+                                            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Classes"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Programação Assíncrona",
+                            "concluido": false,
+                            "conteudo": [
+                                {
+                                    "topico": "Promises, Async/Await",
+                                    "detalhes": "Explore técnicas avançadas para lidar com operações assíncronas em JavaScript.",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Guia de programação assíncrona",
+                                            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/async_function"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "uid": "roadmap-3",
+                    "title": "Frameworks e Bibliotecas",
+                    "concluido": false,
+                    "subtopicos": [
+                        {
+                            "title": "React",
+                            "concluido": false,
+                            "conteudo": [
+                                {
+                                    "topico": "Introdução ao React",
+                                    "detalhes": "Aprenda os conceitos básicos do React, incluindo componentes, props e state.",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Documentação oficial do React",
+                                            "url": "https://reactjs.org/docs/getting-started.html"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Vue.js",
+                            "concluido": false,
+                            "conteudo": [
+                                {
+                                    "topico": "Fundamentos do Vue.js",
+                                    "detalhes": "Explore os conceitos fundamentais do Vue.js, incluindo diretivas, componentes e reatividade.",
+                                    "anexos": [
+                                        {
+                                            "tipo": "link",
+                                            "descricao": "Guia oficial do Vue.js",
+                                            "url": "https://vuejs.org/v2/guide/"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     ]
 }

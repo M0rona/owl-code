@@ -15,7 +15,7 @@ export function DashboardPage() {
 
   return (
     <>
-      <section className="mt-16 flex items-center justify-between">
+      <section className="flex items-center justify-between">
         <div className="flex gap-5 items-center">
           <img
             src={
@@ -32,7 +32,7 @@ export function DashboardPage() {
         <AddJourney />
       </section>
 
-      <section className="flex flex-wrap gap-5 mt-10 justify-center pb-10">
+      <section className="flex flex-wrap gap-5 justify-center pb-10">
         {isLoading
           ? Array.from({ length: 9 }).map(() => (
               <Skeleton className="w-card h-56 rounded-lg" />

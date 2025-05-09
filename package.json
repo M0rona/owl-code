@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "fake-server": "json-server --watch src/fakeApi/db.json --port 3001 --delay 2000"
+    "fake-server": "json-server --watch src/fakeApi/db.json --port 3001 --delay 2000 --id uid"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.11",
