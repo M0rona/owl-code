@@ -1,4 +1,4 @@
-import { Linguagem } from "./linguagens";
+import type { Linguagem } from "./linguagens";
 
 export type JornadaResponse = {
   uid: string;

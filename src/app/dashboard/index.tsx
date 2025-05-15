@@ -32,7 +32,7 @@ export function DashboardPage() {
         <AddJourney />
       </section>
 
-      <section className="flex flex-wrap gap-5 justify-center pb-10">
+      <section className="flex flex-wrap gap-5 justify-start pb-10">
         {isLoading
           ? Array.from({ length: 9 }).map((_, index) => (
               <Skeleton key={index} className="w-card h-56 rounded-lg" />

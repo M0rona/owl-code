@@ -23,8 +23,15 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const token = await user.getIdToken();
+        document.cookie = `auth_token=${token}; path=/; secure; samesite=strict`;
+        setCurrentUser(user);
+      } else {
+        setCurrentUser(null);
+        document.cookie = "auth_token=; path=/; secure; samesite=strict";
+      }
       setLoading(false);
     });
     return unsubscribe;
