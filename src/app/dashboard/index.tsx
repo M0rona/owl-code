@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuthContext } from "@/contexts/auth";
 import { getJornadasByUserId } from "./service/jornadas";
 import { LinguageCard } from "./components/linguageCard";
-import { AddJourney } from "./components/addJourney";
+import { AddJourneyModal } from "./addJourneyModal";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function DashboardPage() {
@@ -29,7 +29,7 @@ export function DashboardPage() {
           <h3>Bem vindo aos seus estudos, {currentUser?.displayName}</h3>
         </div>
 
-        <AddJourney />
+        <AddJourneyModal />
       </section>
 
       <section className="flex flex-wrap gap-5 justify-start pb-10">
