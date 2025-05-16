@@ -29,7 +29,7 @@ export function ChatJornada() {
         Pergunte sobre a trilha 😁
       </h2>
 
-      <div className="space-y-4 overflow-y-auto h-full max-h-[46vh]">
+      <div className="space-y-4 overflow-y-auto h-full max-h-[40vh]">
         {Array.from({ length: 10 }).map((_, index) => {
           return index % 2 === 0 ? (
             <MensagemEnviada key={index}>

@@ -6,7 +6,7 @@ type AuthLayoutProps = {
 
 export function AuthLayout({ children, label, onSubmit }: AuthLayoutProps) {
   return (
-    <main className="flex justify-center items-center h-full">
+    <main className="flex justify-center items-center h-screen">
       <div className="min-w-lg bg-card p-10 rounded-lg relative">
         <h1 className="text-3xl font-semibold">{label}</h1>
 
