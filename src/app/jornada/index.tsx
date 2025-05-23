@@ -4,12 +4,11 @@ import { Link, useParams } from "react-router-dom";
 import { getConteudoJornadasById } from "./service/conteudoJornadas";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, SendHorizonal } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
 import { LoadingJornada } from "./components/loadingJornada";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { ChatJornada } from "./components/chat";
+import { Roadmap } from "./components/roadmap";
 
 export function JornadaPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -80,7 +79,7 @@ export function JornadaPage() {
       </section>
 
       <div className="flex-1 flex gap-10">
-        <section className="size-full"></section>
+        <Roadmap data={data} />
         <ChatJornada />
       </div>
     </>

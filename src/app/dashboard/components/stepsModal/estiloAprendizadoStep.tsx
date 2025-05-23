@@ -1,51 +1,33 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+import MultipleSelector, { Option } from "@/components/ui/multipleSelector";
 
 type EstiloAprendizadoStepProps = {
-  estiloAprendizado: string;
-  setEstiloAprendizado: (estiloAprendizado: string) => void;
-  outroEstiloAprendizado: string;
-  setOutroEstiloAprendizado: (outroEstiloAprendizado: string) => void;
+  estilosAprendizado: Option[];
+  setEstilosAprendizado: (estilosAprendizado: Option[]) => void;
 };
 
 export function EstiloAprendizadoStep({
-  estiloAprendizado,
-  setEstiloAprendizado,
-  outroEstiloAprendizado,
-  setOutroEstiloAprendizado,
+  estilosAprendizado,
+  setEstilosAprendizado,
 }: EstiloAprendizadoStepProps) {
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        Qual seu estilo de aprendizagem preferido?
+        Qual são seus estilos de aprendizagem preferidos?
       </p>
 
-      <Select value={estiloAprendizado} onValueChange={setEstiloAprendizado}>
-        <SelectTrigger className="w-full">
-          <SelectValue placeholder="Selecione seu estilo" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="video-aulas">Vídeo-aulas passo a passo</SelectItem>
-          <SelectItem value="leituras">Leituras e tutoriais</SelectItem>
-          <SelectItem value="projetos">Projetos práticos</SelectItem>
-          <SelectItem value="misturado">Misturado</SelectItem>
-          <SelectItem value="outro">Outro</SelectItem>
-        </SelectContent>
-      </Select>
-
-      {estiloAprendizado === "outro" && (
-        <Input
-          placeholder="Descreva seu estilo de aprendizado"
-          value={outroEstiloAprendizado}
-          onChange={(e) => setOutroEstiloAprendizado(e.target.value)}
-        />
-      )}
+      <MultipleSelector
+        placeholder="Selecione ou adicione estilos de aprendizagem"
+        hidePlaceholderWhenSelected
+        creatable
+        value={estilosAprendizado}
+        onChange={setEstilosAprendizado}
+        defaultOptions={[
+          { value: "video-aulas", label: "Vídeo-aulas passo a passo" },
+          { value: "leituras", label: "Leituras e tutoriais" },
+          { value: "projetos", label: "Projetos práticos" },
+          { value: "misturado", label: "Misturado" },
+        ]}
+      />
     </div>
   );
 }

@@ -41,7 +41,7 @@ export function ExperienciaStep({
 
       {experiencia === "outro" && (
         <Input
-          placeholder="Descreva sua experiência"
+          placeholder="Defina seu tempo de experiência"
           value={outroExperiencia}
           onChange={(e) => setOutroExperiencia(e.target.value)}
         />

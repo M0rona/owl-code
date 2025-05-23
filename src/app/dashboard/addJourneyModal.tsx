@@ -20,20 +20,18 @@ import { DificuldadeStep } from "./components/stepsModal/dificuldadeStep";
 import { EstiloAprendizadoStep } from "./components/stepsModal/estiloAprendizadoStep";
 import { DisponibilidadeStep } from "./components/stepsModal/disponibilidadeStep";
 import { MetaProjetoStep } from "./components/stepsModal/metaProjetoStep";
+import type { Option } from "@/components/ui/multipleSelector";
 
 export function AddJourneyModal() {
   const [formData, setFormData] = useState({
     languageId: null as string | null,
-    objetivo: "",
-    outroObjetivo: "",
+    objetivos: [] as Option[],
     nivel: "",
     experiencia: "",
     outroExperiencia: "",
-    logica: "",
-    outroLogica: "",
+    logicas: [] as Option[],
     dificuldade: "",
-    estiloAprendizado: "",
-    outroEstiloAprendizado: "",
+    estilosAprendizado: [] as Option[],
     disponibilidade: "",
     metaProjeto: "",
   });
@@ -70,11 +68,9 @@ export function AddJourneyModal() {
     />,
     <ObjetivosStep
       key="step-1"
-      objetivo={formData.objetivo}
-      setObjetivo={(objetivo) => setFormData((prev) => ({ ...prev, objetivo }))}
-      outroObjetivo={formData.outroObjetivo}
-      setOutroObjetivo={(outroObjetivo) =>
-        setFormData((prev) => ({ ...prev, outroObjetivo }))
+      objetivos={formData.objetivos}
+      setObjetivos={(objetivos) =>
+        setFormData((prev) => ({ ...prev, objetivos }))
       }
     />,
     <NivelStep
@@ -95,12 +91,8 @@ export function AddJourneyModal() {
     />,
     <LogicaStep
       key="step-4"
-      logica={formData.logica}
-      setLogica={(logica) => setFormData((prev) => ({ ...prev, logica }))}
-      outroLogica={formData.outroLogica}
-      setOutroLogica={(outroLogica) =>
-        setFormData((prev) => ({ ...prev, outroLogica }))
-      }
+      logicas={formData.logicas}
+      setLogicas={(logicas) => setFormData((prev) => ({ ...prev, logicas }))}
     />,
     <DificuldadeStep
       key="step-5"
@@ -111,13 +103,9 @@ export function AddJourneyModal() {
     />,
     <EstiloAprendizadoStep
       key="step-6"
-      estiloAprendizado={formData.estiloAprendizado}
-      setEstiloAprendizado={(estiloAprendizado) =>
-        setFormData((prev) => ({ ...prev, estiloAprendizado }))
-      }
-      outroEstiloAprendizado={formData.outroEstiloAprendizado}
-      setOutroEstiloAprendizado={(outroEstiloAprendizado) =>
-        setFormData((prev) => ({ ...prev, outroEstiloAprendizado }))
+      estilosAprendizado={formData.estilosAprendizado}
+      setEstilosAprendizado={(estilosAprendizado) =>
+        setFormData((prev) => ({ ...prev, estilosAprendizado }))
       }
     />,
     <DisponibilidadeStep
@@ -139,20 +127,16 @@ export function AddJourneyModal() {
   const stepValidations = [
     !!formData.languageId,
 
-    !!formData.objetivo &&
-      (formData.objetivo !== "outro" || !!formData.outroObjetivo),
+    !!formData.objetivos.length,
     !!formData.nivel,
 
     !!formData.experiencia &&
       (formData.experiencia !== "outro" || !!formData.outroExperiencia),
 
-    !!formData.logica &&
-      (formData.logica !== "outro" || !!formData.outroLogica),
+    !!formData.logicas.length,
     !!formData.dificuldade,
 
-    !!formData.estiloAprendizado &&
-      (formData.estiloAprendizado !== "outro" ||
-        !!formData.outroEstiloAprendizado),
+    !!formData.estilosAprendizado.length,
     !!formData.disponibilidade,
     !formData.metaProjeto,
   ];
@@ -166,16 +150,13 @@ export function AddJourneyModal() {
           setCurrentStep(0);
           setFormData({
             languageId: null,
-            objetivo: "",
-            outroObjetivo: "",
+            objetivos: [],
             nivel: "",
             experiencia: "",
             outroExperiencia: "",
-            logica: "",
-            outroLogica: "",
+            logicas: [],
             dificuldade: "",
-            estiloAprendizado: "",
-            outroEstiloAprendizado: "",
+            estilosAprendizado: [],
             disponibilidade: "",
             metaProjeto: "",
           });

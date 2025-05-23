@@ -1,64 +1,38 @@
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+import MultipleSelector, {
+  type Option,
+} from "@/components/ui/multipleSelector";
 
 type ObjetivosStepProps = {
-  objetivo: string;
-  setObjetivo: (objetivo: string) => void;
-  outroObjetivo: string;
-  setOutroObjetivo: (outroObjetivo: string) => void;
+  objetivos: Option[];
+  setObjetivos: (objetivos: Option[]) => void;
 };
 
-export function ObjetivosStep({
-  objetivo,
-  setObjetivo,
-  outroObjetivo,
-  setOutroObjetivo,
-}: ObjetivosStepProps) {
+export function ObjetivosStep({ objetivos, setObjetivos }: ObjetivosStepProps) {
   return (
     <div key="step-1" className="space-y-4">
       <p className="text-sm text-muted-foreground">
         Fale aonde você quer chegar com sua jornada de aprendizado
       </p>
 
-      <Select value={objetivo} onValueChange={setObjetivo}>
-        <SelectTrigger className="w-full">
-          <SelectValue placeholder="Selecione um objetivo" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="comecar-zero">Começar do zero</SelectItem>
-          <SelectItem value="fundamentos">Avançar nos fundamentos</SelectItem>
-          <SelectItem value="projetos">
-            Desenvolver projetos práticos
-          </SelectItem>
-          <SelectItem value="carreira">
-            Preparar para mercado de trabalho
-          </SelectItem>
-          <SelectItem value="especializacao">
-            Especializar em uma área específica
-          </SelectItem>
-          <SelectItem value="frameworks">
-            Aprender frameworks populares
-          </SelectItem>
-          <SelectItem value="desafios">
-            Resolver desafios de programação
-          </SelectItem>
-          <SelectItem value="outro">Outro</SelectItem>
-        </SelectContent>
-      </Select>
-
-      {objetivo === "outro" && (
-        <Input
-          placeholder="Digite seu objetivo"
-          value={outroObjetivo}
-          onChange={(e) => setOutroObjetivo(e.target.value)}
-        />
-      )}
+      <MultipleSelector
+        placeholder="Selecione ou adicione seus objetivos"
+        hidePlaceholderWhenSelected
+        creatable
+        value={objetivos}
+        onChange={setObjetivos}
+        defaultOptions={[
+          { value: "comecar-zero", label: "Começar do zero" },
+          { value: "fundamentos", label: "Avançar nos fundamentos" },
+          { value: "projetos", label: "Desenvolver projetos práticos" },
+          { value: "carreira", label: "Preparar para mercado de trabalho" },
+          {
+            value: "especializacao",
+            label: "Especializar em uma área específica",
+          },
+          { value: "frameworks", label: "Aprender frameworks populares" },
+          { value: "desafios", label: "Resolver desafios de programação" },
+        ]}
+      />
     </div>
   );
 }
