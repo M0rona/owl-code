@@ -13,20 +13,25 @@ interface Roadmap {
   subtopicos: Subtopico[];
 }
 
-interface Subtopico {
+export interface Subtopico {
   title: string;
   concluido: boolean;
-  conteudo: Conteudo[];
+  conteudo: Conteudo;
 }
 
 interface Conteudo {
   topico: string;
   detalhes: string;
   anexos: Anexo[];
+  exemplos: Exemplos[];
 }
 
 interface Anexo {
-  tipo: string;
-  descricao: string;
+  tipo: "video" | "documentacao";
   url: string;
+}
+
+interface Exemplos {
+  titulo: string;
+  codigo: string;
 }

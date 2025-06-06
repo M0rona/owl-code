@@ -3,4 +3,5 @@ export type Linguagem = {
   cor: string;
   nome: string;
   url: string;
+  sigla: string;
 };

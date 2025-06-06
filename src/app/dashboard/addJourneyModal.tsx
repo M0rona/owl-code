@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -173,6 +174,7 @@ export function AddJourneyModal() {
       <DialogContent aria-describedby="dialog-select-language">
         <DialogHeader>
           <DialogTitle>Iniciar jornada</DialogTitle>
+          <DialogDescription />
         </DialogHeader>
 
         <div className="mt-8">{stepContents[currentStep]}</div>
