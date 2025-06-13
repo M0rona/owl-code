@@ -8,13 +8,18 @@ export interface CustomNodeData extends Node {
   sigla: string;
   connections?: boolean;
   checked?: boolean;
+  isLoading?: boolean;
   onCheck?: (checked: boolean) => void;
-  subNodeContent: Subtopico;
+  subNodeContent?: Subtopico;
 }
 
 export function CustomNode({ data }: { data: CustomNodeData }) {
   return (
-    <div className="flex items-center gap-4 bg-card relative cursor-pointer rounded-lg">
+    <div
+      className={`flex items-center gap-4 bg-card relative cursor-pointer rounded-lg ${
+        data.isLoading ? "opacity-50" : ""
+      }`}
+    >
       <Handle
         type="target"
         position={Position.Left}
@@ -27,18 +32,32 @@ export function CustomNode({ data }: { data: CustomNodeData }) {
       <Checkbox
         className="size-8 ml-5"
         checked={data.checked}
-        onCheckedChange={data.onCheck}
+        disabled={data.isLoading}
+        onCheckedChange={(checked) => {
+          if (data.onCheck && typeof checked === "boolean") {
+            data.onCheck(checked);
+          }
+        }}
       />
-      <DetalhesSubtopico
-        subNodeContent={data.subNodeContent}
-        sigla={data.sigla}
-      >
+      {data?.subNodeContent ? (
+        <DetalhesSubtopico
+          subNodeContent={data.subNodeContent}
+          sigla={data.sigla}
+        >
+          <div className="h-full p-5 pl-0">
+            <span style={{ fontWeight: 600, whiteSpace: "pre-line" }}>
+              {String(data.label)}
+            </span>
+          </div>
+        </DetalhesSubtopico>
+      ) : (
         <div className="h-full p-5 pl-0">
           <span style={{ fontWeight: 600, whiteSpace: "pre-line" }}>
             {String(data.label)}
           </span>
         </div>
-      </DetalhesSubtopico>
+      )}
+
       <Handle
         type="source"
         position={Position.Right}

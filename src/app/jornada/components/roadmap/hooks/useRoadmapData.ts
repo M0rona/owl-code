@@ -2,10 +2,15 @@ import { useMemo } from "react";
 import { Node, Edge } from "@xyflow/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ConteudoJornadaResponse } from "../../../service/types/conteudoJornadaResponse";
+import { atualizaTopicoCompleto } from "@/app/jornada/service/conteudoJornadas";
 
 export function useRoadmapData(
-  data: ConteudoJornadaResponse | undefined,
-  idJornada: string | undefined
+  data: ConteudoJornadaResponse | undefined | void,
+  idJornada: string | undefined,
+  loadingMap?: { [key: string]: boolean },
+  setLoadingMap?: React.Dispatch<
+    React.SetStateAction<{ [key: string]: boolean }>
+  >
 ) {
   const queryClient = useQueryClient();
 
@@ -36,34 +41,51 @@ export function useRoadmapData(
             label: sub.title,
             sigla: data.jornada.linguagem.sigla,
             checked: sub.concluido,
+            isLoading: loadingMap ? loadingMap[childId] : false,
             subNodeContent: sub,
-            onCheck: (checked: boolean) => {
-              queryClient.setQueryData(
-                ["conteudoJornada", idJornada],
-                (oldData: ConteudoJornadaResponse | undefined) => {
-                  if (!oldData) return oldData;
+            onCheck: async (checked: boolean) => {
+              if (!setLoadingMap) return;
+              setLoadingMap((prev) => ({ ...prev, [childId]: true }));
 
-                  return {
-                    ...oldData,
-                    roadmap: oldData.roadmap.map((modulo, modIndex: number) => {
-                      if (modIndex === i) {
-                        return {
-                          ...modulo,
-                          subtopicos: modulo.subtopicos.map(
-                            (sub, subIndex: number) => {
-                              if (subIndex === j) {
-                                return { ...sub, concluido: checked };
-                              }
-                              return sub;
-                            }
-                          ),
-                        };
-                      }
-                      return modulo;
-                    }),
-                  };
-                }
+              if (!idJornada) return;
+
+              // TODO: Implementar a lógica de atualização do tópico
+              const response = await atualizaTopicoCompleto(
+                idJornada,
+                modulo.uid,
+                sub.uid
               );
+              // queryClient.setQueryData(
+              //   ["conteudoJornada", idJornada],
+              //   (oldData: ConteudoJornadaResponse | undefined) => {
+              //     if (!oldData) return oldData;
+
+              //     return {
+              //       ...oldData,
+              //       roadmap: oldData.roadmap.map((modulo, modIndex: number) => {
+              //         if (modIndex === i) {
+              //           return {
+              //             ...modulo,
+              //             subtopicos: modulo.subtopicos.map(
+              //               (sub, subIndex: number) => {
+              //                 if (subIndex === j) {
+              //                   setLoadingMap((prev) => ({
+              //                     ...prev,
+              //                     [childId]: false,
+              //                   }));
+
+              //                   return { ...sub, concluido: checked };
+              //                 }
+              //                 return sub;
+              //               }
+              //             ),
+              //           };
+              //         }
+              //         return modulo;
+              //       }),
+              //     };
+              //   }
+              // );
             },
           },
           position: { x: 450, y: yBase + 50 + j * 100 },
@@ -80,5 +102,12 @@ export function useRoadmapData(
     });
 
     return { nodes, edges };
-  }, [data?.jornada.linguagem.sigla, data?.roadmap, idJornada, queryClient]);
+  }, [
+    data?.jornada.linguagem.sigla,
+    data?.roadmap,
+    idJornada,
+    queryClient,
+    loadingMap,
+    setLoadingMap,
+  ]);
 }

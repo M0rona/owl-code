@@ -24,12 +24,12 @@ export function ChatJornada() {
   }
 
   return (
-    <section className="size-full max-w-[26rem] bg-card rounded-xl p-6 flex flex-col">
+    <section className="size-full max-h-[calc(100vh-270px)] max-w-[26rem] h-full bg-card rounded-xl p-6 flex flex-col">
       <h2 className="text-xl font-semibold text-center mb-6">
         Pergunte sobre a trilha 😁
       </h2>
 
-      <div className="space-y-4 overflow-y-auto h-full max-h-[40vh]">
+      <div className="space-y-4 flex-1 min-h-0 overflow-y-auto">
         {Array.from({ length: 10 }).map((_, index) => {
           return index % 2 === 0 ? (
             <MensagemEnviada key={index}>

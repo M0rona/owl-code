@@ -37,9 +37,9 @@ export function DashboardPage() {
           ? Array.from({ length: 9 }).map((_, index) => (
               <Skeleton key={index} className="w-card h-56 rounded-lg" />
             ))
-          : data?.map((jornada) => (
+          : data ? data.map((jornada) => (
               <LinguageCard key={jornada.uid} data={jornada} />
-            ))}
+            )) : (<span>Nenhuma jornada encontrada</span>)}
       </section>
     </>
   );

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ReactFlow, Background } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useParams } from "react-router-dom";
@@ -10,10 +11,18 @@ const nodeTypes = { custom: CustomNode };
 export function Roadmap({
   data,
 }: {
-  data: ConteudoJornadaResponse | undefined;
+  data: ConteudoJornadaResponse | undefined | void;
 }) {
   const { idJornada } = useParams();
-  const { nodes, edges } = useRoadmapData(data, idJornada);
+  // Estado de loading por nodeId
+  const [loadingMap, setLoadingMap] = useState<{ [key: string]: boolean }>({});
+
+  const { nodes, edges } = useRoadmapData(
+    data,
+    idJornada,
+    loadingMap,
+    setLoadingMap
+  );
 
   return (
     <section className="flex-1">

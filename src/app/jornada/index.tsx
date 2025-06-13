@@ -1,19 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { getConteudoJornadasById } from "./service/conteudoJornadas";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import { useState } from "react";
 import { LoadingJornada } from "./components/loadingJornada";
 import { ChatJornada } from "./components/chat";
 import { Roadmap } from "./components/roadmap";
 
 export function JornadaPage() {
-  const [isLoading, setIsLoading] = useState(false);
   const { idJornada } = useParams();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["conteudoJornada", idJornada],
     queryFn: async () => {
       if (!idJornada) {
@@ -22,14 +20,6 @@ export function JornadaPage() {
       return await getConteudoJornadasById(idJornada);
     },
   });
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setIsLoading((prevState) => !prevState);
-  //   }, 2000);
-
-  //   return () => clearInterval(interval);
-  // }, []);
 
   if (!idJornada) {
     toast.error("Id da jornada não encontrado");
@@ -78,7 +68,7 @@ export function JornadaPage() {
         </Link>
       </section>
 
-      <div className="flex-1 flex gap-10">
+      <div className="flex gap-10 h-full">
         <Roadmap data={data} />
         <ChatJornada />
       </div>

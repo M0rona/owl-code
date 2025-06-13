@@ -14,6 +14,7 @@ interface Roadmap {
 }
 
 export interface Subtopico {
+  uid: string;
   title: string;
   concluido: boolean;
   conteudo: Conteudo;
