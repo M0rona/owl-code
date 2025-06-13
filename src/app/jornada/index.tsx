@@ -1,4 +1,3 @@
- 
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { getConteudoJornadasById } from "./service/conteudoJornadas";
@@ -8,6 +7,8 @@ import { ArrowLeft } from "lucide-react";
 import { LoadingJornada } from "./components/loadingJornada";
 import { ChatJornada } from "./components/chat";
 import { Roadmap } from "./components/roadmap";
+import { PercentageProgressBar } from "./components/percentageProgressBar";
+import { PercentageProgressProvider } from "./contexts/percentageProgress";
 
 export function JornadaPage() {
   const { idJornada } = useParams();
@@ -29,7 +30,7 @@ export function JornadaPage() {
   return isLoading ? (
     <LoadingJornada />
   ) : (
-    <>
+    <PercentageProgressProvider>
       <section className="flex justify-between items-center gap-5">
         <article className="flex gap-5 w-[28rem]">
           <img
@@ -38,22 +39,13 @@ export function JornadaPage() {
           />
 
           <div className="flex flex-col justify-center gap-4 w-full">
-            <h2 className="text-lg ">{data?.jornada.linguagem.nome}</h2>
-
+            <h2 className="text-lg ">{data?.jornada.linguagem.nome}</h2>{" "}
             <div className="w-full h-2 bg-card rounded-sm relative">
-              <div
-                className="h-full rounded-sm"
-                style={{
-                  backgroundColor: data?.jornada.linguagem.cor,
-                  width: `${data?.jornada.progresso_percent}%`,
-                }}
+              <PercentageProgressBar
+                color={data?.jornada.linguagem.cor}
+                percentage={data?.jornada.progresso_percent || 0}
               />
-
-              <span className="absolute right-0 -top-7">
-                {data?.jornada.progresso_percent}%
-              </span>
             </div>
-
             <span className="absolute right-0 -top-7">
               {data?.jornada.progresso_percent}%
             </span>
@@ -72,6 +64,6 @@ export function JornadaPage() {
         <Roadmap data={data} />
         <ChatJornada />
       </div>
-    </>
+    </PercentageProgressProvider>
   );
 }

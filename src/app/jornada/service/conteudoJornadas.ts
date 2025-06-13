@@ -19,7 +19,7 @@ export async function getConteudoJornadasById(idJornada: string) {
 
 export async function atualizaModuloCompleto(
   jornada_id: string,
-  modulo_id: string
+  modulo_id: number
 ) {
   return await api
     .patch<AtualizaNodesResponse>("jornadas/modulo", {
@@ -37,7 +37,7 @@ export async function atualizaModuloCompleto(
 
 export async function atualizaTopicoCompleto(
   jornada_id: string,
-  modulo_id: string,
+  modulo_id: number,
   topico_id: string
 ) {
   return await api

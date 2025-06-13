@@ -7,7 +7,7 @@ export interface ConteudoJornadaResponse {
 }
 
 interface Roadmap {
-  uid: string;
+  uid: number;
   title: string;
   concluido: boolean;
   subtopicos: Subtopico[];
