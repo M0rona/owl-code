@@ -24,35 +24,35 @@ export function LogicaStep({ logicas, setLogicas }: LogicaStepProps) {
             label: "Nenhum",
           },
           {
-            value: "variaveis-condicionais",
+            value: "variaveis e condicionais",
             label: "Variáveis e condicionais",
           },
           {
-            value: "loops-colecoes",
+            value: "loops e colecoes",
             label: "Loops e coleções",
           },
           {
-            value: "algoritmos-simples",
+            value: "algoritmos simples",
             label: "Algoritmos simples",
           },
           {
-            value: "funcoes-metodos",
+            value: "funcoes e metodos",
             label: "Funções e métodos",
           },
           {
-            value: "estruturas-dados",
+            value: "estruturas de dados",
             label: "Estruturas de dados",
           },
           {
-            value: "algoritmos-avancados",
+            value: "algoritmos avancados",
             label: "Algoritmos avançados",
           },
           {
-            value: "paradigmas",
+            value: "paradigmas de programação",
             label: "Paradigmas de programação",
           },
           {
-            value: "otimizacao",
+            value: "otimizacao de codigo",
             label: "Otimização de código",
           },
         ]}

@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { PlusIcon, Rocket } from "lucide-react";
 import { getLinguagens } from "./service/linguagens";
 // import { newJornada } from "../service/jornadas";
@@ -22,10 +22,14 @@ import { EstiloAprendizadoStep } from "./components/stepsModal/estiloAprendizado
 import { DisponibilidadeStep } from "./components/stepsModal/disponibilidadeStep";
 import { MetaProjetoStep } from "./components/stepsModal/metaProjetoStep";
 import type { Option } from "@/components/ui/multipleSelector";
+import Lottie from "lottie-react";
+import owlAnimation from "@/assets/animations/owlAnimation.json";
+import { newJornada } from "./service/jornadas";
 
 export function AddJourneyModal() {
+  const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
-    languageId: null as string | null,
+    language: "" as string,
     objetivos: [] as Option[],
     nivel: "",
     experiencia: "",
@@ -36,6 +40,7 @@ export function AddJourneyModal() {
     disponibilidade: "",
     metaProjeto: "",
   });
+  const [isCreating, setIsCreating] = useState(false);
 
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -44,26 +49,42 @@ export function AddJourneyModal() {
     queryFn: getLinguagens,
   });
 
-  const mutation = useMutation({
-    mutationKey: ["jornadas"],
-    mutationFn: async (languageId: string) => {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
-      return languageId;
-    },
-  });
+  const handleStartJourney = async () => {
+    setIsCreating(true);
 
-  const handleStartJourney = () => {
-    if (!formData.languageId) return;
-    setOpen(false);
-    mutation.mutate(formData.languageId);
+    await newJornada({
+      linguagem: formData.language,
+      dificuldades: [formData.dificuldade],
+      disponibilidade: formData.disponibilidade,
+      estilos_aprendizagem: formData.estilosAprendizado.map(
+        (estilo) => estilo.value
+      ),
+      experiencia_linguagem: formData.outroExperiencia ?? formData.experiencia,
+      conhecimento_logica: formData.logicas.map(
+        (conhecimento) => conhecimento.value
+      ),
+      meta_pessoal: [formData.metaProjeto],
+      nivel_programacao: formData.nivel,
+      objetivo_final: formData.objetivos
+        .map((objetivo) => objetivo.value)
+        .join(", "),
+      complemento: "",
+    }).then(() => {
+      setOpen(false);
+      setIsCreating(false);
+
+      queryClient.fetchQuery({
+        queryKey: ["jornadas"],
+      });
+    });
   };
 
   const stepContents = [
     <LanguagesStep
       key="step-0"
-      languageId={formData.languageId}
-      setLanguageId={(languageId) =>
-        setFormData((prev) => ({ ...prev, languageId }))
+      language={formData.language}
+      setLanguage={(language: string) =>
+        setFormData((prev) => ({ ...prev, language }))
       }
       data={data}
     />,
@@ -126,7 +147,7 @@ export function AddJourneyModal() {
   ];
 
   const stepValidations = [
-    !!formData.languageId,
+    !!formData.language,
 
     !!formData.objetivos.length,
     !!formData.nivel,
@@ -150,7 +171,7 @@ export function AddJourneyModal() {
         if (!open) {
           setCurrentStep(0);
           setFormData({
-            languageId: null,
+            language: "",
             objetivos: [],
             nivel: "",
             experiencia: "",
@@ -171,42 +192,57 @@ export function AddJourneyModal() {
         </Button>
       </DialogTrigger>
 
-      <DialogContent aria-describedby="dialog-select-language">
-        <DialogHeader>
-          <DialogTitle>Iniciar jornada</DialogTitle>
-          <DialogDescription />
-        </DialogHeader>
+      <DialogContent
+        aria-describedby="dialog-select-language"
+        onInteractOutside={!isCreating ? (e) => e.preventDefault() : undefined}
+      >
+        {!isCreating ? (
+          <>
+            <DialogHeader>
+              <DialogTitle>Iniciar jornada</DialogTitle>
+              <DialogDescription />
+            </DialogHeader>
 
-        <div className="mt-8">{stepContents[currentStep]}</div>
+            <div className="mt-8">{stepContents[currentStep]}</div>
 
-        <div className="flex justify-between mt-8">
-          <Button
-            variant="outline"
-            onClick={() => setCurrentStep(currentStep - 1)}
-            disabled={currentStep === 0}
-          >
-            Voltar
-          </Button>
+            <div className="flex justify-between mt-8">
+              <Button
+                variant="outline"
+                onClick={() => setCurrentStep(currentStep - 1)}
+                disabled={currentStep === 0}
+              >
+                Voltar
+              </Button>
 
-          {currentStep === stepContents.length - 1 ? (
-            <Button
-              size="lg"
-              onClick={handleStartJourney}
-              disabled={stepValidations[currentStep] ?? mutation.isPending}
-            >
-              {mutation.isPending ? "Iniciando..." : "Começar jornada"}
-              <Rocket />
-            </Button>
-          ) : (
-            <Button
-              size="lg"
-              onClick={() => setCurrentStep(currentStep + 1)}
-              disabled={!stepValidations[currentStep]}
-            >
-              Próximo
-            </Button>
-          )}
-        </div>
+              {currentStep === stepContents.length - 1 ? (
+                <Button
+                  size="lg"
+                  onClick={handleStartJourney}
+                  disabled={stepValidations[currentStep]}
+                >
+                  Começar jornada
+                  <Rocket />
+                </Button>
+              ) : (
+                <Button
+                  size="lg"
+                  onClick={() => setCurrentStep(currentStep + 1)}
+                  disabled={!stepValidations[currentStep]}
+                >
+                  Próximo
+                </Button>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="flex flex-col items-center">
+            <Lottie animationData={owlAnimation} className="size-4/5" />
+
+            <h2 className="text-2xl">
+              Iniciando sua nova jornada de {formData.language}
+            </h2>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

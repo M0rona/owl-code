@@ -33,13 +33,17 @@ export function DashboardPage() {
       </section>
 
       <section className="flex flex-wrap gap-5 justify-start pb-10">
-        {isLoading
-          ? Array.from({ length: 9 }).map((_, index) => (
-              <Skeleton key={index} className="w-card h-56 rounded-lg" />
-            ))
-          : data ? data.map((jornada) => (
-              <LinguageCard key={jornada.uid} data={jornada} />
-            )) : (<span>Nenhuma jornada encontrada</span>)}
+        {isLoading ? (
+          Array.from({ length: 9 }).map((_, index) => (
+            <Skeleton key={index} className="w-card h-56 rounded-lg" />
+          ))
+        ) : data ? (
+          data.map((jornada) => (
+            <LinguageCard key={jornada.uid} data={jornada} />
+          ))
+        ) : (
+          <span>Nenhuma jornada iniciada</span>
+        )}
       </section>
     </>
   );

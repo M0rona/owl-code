@@ -1,5 +1,5 @@
 import { api } from "@/config/axios";
-import { JornadaResponse } from "./types/jornadaResponse";
+import { JornadaResponse, NewJornadaDataDto } from "./types/jornada";
 import { toast } from "sonner";
 import { ApiError } from "@/types/axios";
 import { AxiosError } from "axios";
@@ -14,10 +14,10 @@ export async function getJornadasByUserId() {
     });
 }
 
-export async function newJornada(uidLinguagem: string) {
+export async function newJornada(data: NewJornadaDataDto) {
   return api
-    .post("jornadas", {
-      uidLinguagem,
+    .post("/jornadas/criarJornada", {
+      data,
     })
     .then(() => toast.success("Jornada criada com sucesso!"))
     .catch((error: AxiosError<ApiError>) => {

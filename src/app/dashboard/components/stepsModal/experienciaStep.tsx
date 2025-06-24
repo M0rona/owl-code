@@ -32,9 +32,9 @@ export function ExperienciaStep({
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="nenhuma">Nenhuma</SelectItem>
-          <SelectItem value="1-3-meses">1–3 meses</SelectItem>
-          <SelectItem value="3-6-meses">3–6 meses</SelectItem>
-          <SelectItem value="6-meses+">+6 meses</SelectItem>
+          <SelectItem value="1 a 3 meses">1–3 meses</SelectItem>
+          <SelectItem value="3 a 6 meses">3–6 meses</SelectItem>
+          <SelectItem value="+6 meses">+6 meses</SelectItem>
           <SelectItem value="outro">Outro</SelectItem>
         </SelectContent>
       </Select>

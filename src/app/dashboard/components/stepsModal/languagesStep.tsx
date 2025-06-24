@@ -8,26 +8,26 @@ import {
 import { Linguagem } from "../../service/types/linguagens";
 
 type LanguagesStepsProps = {
-  languageId: string | null;
-  setLanguageId: (languageId: string | null) => void;
+  language: string | null;
+  setLanguage: (language: string) => void;
   data?: Linguagem[] | void;
 };
 
 export function LanguagesStep({
-  languageId,
-  setLanguageId,
+  language,
+  setLanguage,
   data,
 }: LanguagesStepsProps) {
   return (
     <div key="step-0" className="flex flex-col gap-4">
       <p>Siga os passos para começar sua jornada de aprendizado</p>
-      <Select value={languageId ?? ""} onValueChange={setLanguageId}>
+      <Select value={language ?? ""} onValueChange={setLanguage}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Selecione uma linguagem" />
         </SelectTrigger>
         <SelectContent>
           {data?.map((linguagem) => (
-            <SelectItem key={linguagem.uid} value={linguagem.uid}>
+            <SelectItem key={linguagem.uid} value={linguagem.nome}>
               {linguagem.nome}
             </SelectItem>
           ))}

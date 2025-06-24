@@ -1,13 +1,15 @@
 import { useMemo } from "react";
-import { Node, Edge } from "@xyflow/react";
 import { useQueryClient } from "@tanstack/react-query";
-import { ConteudoJornadaResponse } from "../../../service/types/conteudoJornadaResponse";
-import {
-  atualizaModuloCompleto,
-  atualizaTopicoCompleto,
-} from "@/app/jornada/service/conteudoJornadas";
 import { usePercentageProgress } from "@/app/jornada/contexts/percentageProgress";
+import { ConteudoJornadaResponse } from "../../../service/types/conteudoJornadaResponse";
+import { ModuleUpdateHandler } from "../handlers/moduleUpdateHandler";
+import { TopicUpdateHandler } from "../handlers/topicUpdateHandler";
+import { transformRoadmapData } from "../utils/roadmapTransformer";
+import { RoadmapData } from "../types/roadmapTypes";
 
+/**
+ * Hook para gerenciar os dados do roadmap e suas interações
+ */
 export function useRoadmapData(
   data: ConteudoJornadaResponse | undefined | void,
   idJornada: string | undefined,
@@ -15,163 +17,40 @@ export function useRoadmapData(
   setLoadingMap?: React.Dispatch<
     React.SetStateAction<{ [key: string]: boolean }>
   >
-) {
+): RoadmapData {
   const { setPercentage } = usePercentageProgress();
   const queryClient = useQueryClient();
 
+  // Cria os handlers para atualização de módulos e tópicos
+  const moduleHandler = useMemo(
+    () =>
+      new ModuleUpdateHandler({
+        idJornada,
+        queryClient,
+        setPercentage,
+        setLoadingMap,
+      }),
+    [idJornada, queryClient, setPercentage, setLoadingMap]
+  );
+
+  const topicHandler = useMemo(
+    () =>
+      new TopicUpdateHandler({
+        idJornada,
+        queryClient,
+        setPercentage,
+        setLoadingMap,
+      }),
+    [idJornada, queryClient, setPercentage, setLoadingMap]
+  );
+
+  // Transforma os dados da API em estrutura para o componente de visualização
   return useMemo(() => {
-    if (!data?.roadmap) return { nodes: [], edges: [] };
+    const handlers = {
+      moduleHandler,
+      topicHandler,
+    };
 
-    const nodes: Node[] = [];
-    const edges: Edge[] = [];
-    let yBase = 0;
-
-    data.roadmap.forEach((modulo, i: number) => {
-      const parentId = `modulo-${i}`;
-      // Nó do módulo (pai)
-      nodes.push({
-        id: parentId,
-        type: "custom",
-        data: {
-          label: modulo.title,
-          isLoading: loadingMap ? loadingMap[parentId] : false,
-          checked: modulo.concluido,
-          onCheck: async (checked: boolean) => {
-            if (!idJornada) return;
-            if (!setLoadingMap) return;
-
-            setLoadingMap((prev) => ({ ...prev, [parentId]: true }));
-
-            const res = await atualizaModuloCompleto(idJornada, modulo.uid);
-            if (!res) return;
-
-            setPercentage(res.progresso_percent || 0);
-
-            queryClient.setQueryData(
-              ["conteudoJornada", idJornada],
-              (oldData: ConteudoJornadaResponse | undefined) => {
-                if (!oldData) return oldData;
-                if (!setLoadingMap) return;
-
-                return {
-                  ...oldData,
-                  roadmap: oldData.roadmap.map((modulo) => {
-                    if (res.topicos_status.modulo_id === modulo.uid) {
-                      return {
-                        ...modulo,
-                        concluido: checked,
-                        subtopicos: modulo.subtopicos.map(
-                          (sub, subIndex: number) => {
-                            setLoadingMap((prev) => ({
-                              ...prev,
-                              [parentId]: false,
-                            }));
-
-                            return {
-                              ...sub,
-                              concluido:
-                                res.topicos_status.topicos[subIndex].finalizado,
-                            };
-                          }
-                        ),
-                      };
-                    }
-                    return modulo;
-                  }),
-                };
-              }
-            );
-          },
-        },
-        position: { x: 0, y: yBase + 50 },
-      });
-
-      // Subtópicos (filhos)
-      modulo.subtopicos.forEach((sub, j: number) => {
-        const childId = `modulo-${i}-sub-${j}`;
-        nodes.push({
-          id: childId,
-          type: "custom",
-          data: {
-            label: sub.title,
-            sigla: data.jornada.linguagem.sigla,
-            checked: sub.concluido,
-            isLoading: loadingMap ? loadingMap[childId] : false,
-            subNodeContent: sub,
-            onCheck: async () => {
-              if (!setLoadingMap) return;
-              setLoadingMap((prev) => ({ ...prev, [childId]: true }));
-
-              if (!idJornada) return;
-
-              const res = await atualizaTopicoCompleto(
-                idJornada,
-                modulo.uid,
-                sub.uid
-              );
-
-              if (!res) return;
-              setPercentage(res.progresso_percent || 0);
-
-              queryClient.setQueryData(
-                ["conteudoJornada", idJornada],
-                (oldData: ConteudoJornadaResponse | undefined) => {
-                  if (!oldData) return oldData;
-
-                  return {
-                    ...oldData,
-                    roadmap: oldData.roadmap.map((modulo) => {
-                      if (res.topicos_status.modulo_id === modulo.uid) {
-                        return {
-                          ...modulo,
-                          concluido: res.topicos_status.topicos.every(
-                            (status) => status.finalizado
-                          ),
-                          subtopicos: modulo.subtopicos.map(
-                            (sub, subIndex: number) => {
-                              setLoadingMap((prev) => ({
-                                ...prev,
-                                [childId]: false,
-                              }));
-
-                              return {
-                                ...sub,
-                                concluido:
-                                  res.topicos_status.topicos[subIndex]
-                                    .finalizado,
-                              };
-                            }
-                          ),
-                        };
-                      }
-                      return modulo;
-                    }),
-                  };
-                }
-              );
-            },
-          },
-          position: { x: 450, y: yBase + 50 + j * 100 },
-        });
-        edges.push({
-          id: `e-${parentId}-${childId}`,
-          source: parentId,
-          target: childId,
-        });
-      });
-
-      // Atualiza yBase para o próximo módulo
-      yBase += Math.max(1, modulo.subtopicos.length) * 100 + 50;
-    });
-
-    return { nodes, edges };
-  }, [
-    data?.jornada.linguagem.sigla,
-    data?.roadmap,
-    idJornada,
-    loadingMap,
-    queryClient,
-    setLoadingMap,
-    setPercentage,
-  ]);
+    return transformRoadmapData(data, handlers, loadingMap || {});
+  }, [data, moduleHandler, topicHandler, loadingMap]);
 }

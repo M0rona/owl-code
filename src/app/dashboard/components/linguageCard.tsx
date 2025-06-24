@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { JornadaResponse } from "../service/types/jornadaResponse";
+import { JornadaResponse } from "../service/types/jornada";
 
 export function LinguageCard({ data }: { data: JornadaResponse }) {
   const navigate = useNavigate();

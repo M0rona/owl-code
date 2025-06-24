@@ -3,10 +3,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { SendHorizonal } from "lucide-react";
 import { MensagemEnviada } from "./mensagemEnviada";
 import { MensagemRecebida } from "./mensagemRecebida";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { tirarDuvidasGpt } from "@/app/dashboard/service/gptDuvidas";
+import { useParams } from "react-router-dom";
 
 export function ChatJornada() {
+  const { idJornada } = useParams();
+  const [conversa, setConversa] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "instant" });
@@ -14,13 +21,34 @@ export function ChatJornada() {
 
   useEffect(() => {
     scrollToBottom();
-  }, []);
+  }, [conversa]);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (!isLoading && conversa.length) {
+      textAreaRef.current?.focus();
+    }
+  }, [isLoading, conversa]);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const pergunta = formData.get("pergunta") as string;
+
+    if (!pergunta.trim() || !idJornada) return;
+
+    setConversa((conversas) => [...conversas, pergunta]);
+    setIsLoading(true);
 
     const formElement = e.target as HTMLFormElement;
     formElement.reset();
+
+    await tirarDuvidasGpt(idJornada, pergunta)
+      .then((response) => {
+        if (response)
+          setConversa((conversas) => [...conversas, response.resposta]);
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -30,24 +58,37 @@ export function ChatJornada() {
       </h2>
 
       <div className="space-y-4 flex-1 min-h-0 overflow-y-auto">
-        {Array.from({ length: 10 }).map((_, index) => {
+        {conversa.map((mensagem, index) => {
           return index % 2 === 0 ? (
-            <MensagemEnviada key={index}>
-              Como posso começar esta trilha?
-            </MensagemEnviada>
+            <MensagemEnviada key={index}>{mensagem}</MensagemEnviada>
           ) : (
-            <MensagemRecebida key={index}>
-              Você pode começar pelos fundamentos básicos da linguagem. Vou te
-              mostrar o primeiro módulo!
-            </MensagemRecebida>
+            <MensagemRecebida key={index}>{mensagem}</MensagemRecebida>
           );
         })}
+
+        {isLoading && (
+          <MensagemRecebida>
+            <div className="flex space-x-1">
+              <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
+              <div
+                className="w-2 h-2 bg-current rounded-full animate-bounce"
+                style={{ animationDelay: "0.1s" }}
+              ></div>
+              <div
+                className="w-2 h-2 bg-current rounded-full animate-bounce"
+                style={{ animationDelay: "0.2s" }}
+              ></div>
+            </div>
+          </MensagemRecebida>
+        )}
 
         <div ref={messagesEndRef} />
       </div>
 
       <form className="mt-6 flex gap-4 items-center" onSubmit={handleSubmit}>
         <Textarea
+          ref={textAreaRef}
+          name="pergunta"
           className="h-18 resize-none"
           placeholder="Digite sua pergunta..."
           onKeyDown={(e) => {
@@ -56,8 +97,9 @@ export function ChatJornada() {
               e.currentTarget.form?.requestSubmit();
             }
           }}
+          disabled={isLoading}
         />
-        <Button className="rounded-full size-12">
+        <Button className="rounded-full size-12" disabled={isLoading}>
           <SendHorizonal />
         </Button>
       </form>

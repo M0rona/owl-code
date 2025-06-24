@@ -22,9 +22,12 @@ export function EstiloAprendizadoStep({
         value={estilosAprendizado}
         onChange={setEstilosAprendizado}
         defaultOptions={[
-          { value: "video-aulas", label: "Vídeo-aulas passo a passo" },
-          { value: "leituras", label: "Leituras e tutoriais" },
-          { value: "projetos", label: "Projetos práticos" },
+          {
+            value: "video aulas passo a passo",
+            label: "Vídeo-aulas passo a passo",
+          },
+          { value: "leituras e tutoriais", label: "Leituras e tutoriais" },
+          { value: "projetos práticos", label: "Projetos práticos" },
           { value: "misturado", label: "Misturado" },
         ]}
       />

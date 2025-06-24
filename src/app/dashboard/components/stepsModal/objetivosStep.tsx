@@ -21,16 +21,31 @@ export function ObjetivosStep({ objetivos, setObjetivos }: ObjetivosStepProps) {
         value={objetivos}
         onChange={setObjetivos}
         defaultOptions={[
-          { value: "comecar-zero", label: "Começar do zero" },
-          { value: "fundamentos", label: "Avançar nos fundamentos" },
-          { value: "projetos", label: "Desenvolver projetos práticos" },
-          { value: "carreira", label: "Preparar para mercado de trabalho" },
+          { value: "comecar do zero", label: "Começar do zero" },
           {
-            value: "especializacao",
+            value: "avançar nos fundamentos",
+            label: "Avançar nos fundamentos",
+          },
+          {
+            value: "desenvolver projetos praticos",
+            label: "Desenvolver projetos práticos",
+          },
+          {
+            value: "se praparar para o mercado de trabalho",
+            label: "Preparar para mercado de trabalho",
+          },
+          {
+            value: "se especializar em uma área especifica",
             label: "Especializar em uma área específica",
           },
-          { value: "frameworks", label: "Aprender frameworks populares" },
-          { value: "desafios", label: "Resolver desafios de programação" },
+          {
+            value: "aprender frameworks populares",
+            label: "Aprender frameworks populares",
+          },
+          {
+            value: "resolver desafios de programação",
+            label: "Resolver desafios de programação",
+          },
         ]}
       />
     </div>

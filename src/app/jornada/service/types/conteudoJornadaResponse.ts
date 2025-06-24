@@ -1,4 +1,4 @@
-import { JornadaResponse } from "@/app/dashboard/service/types/jornadaResponse";
+import { JornadaResponse } from "@/app/dashboard/service/types/jornada";
 
 export interface ConteudoJornadaResponse {
   uid: string;

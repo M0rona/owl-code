@@ -26,10 +26,10 @@ export function DisponibilidadeStep({
           <SelectValue placeholder="Selecione sua disponibilidade" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="menos-3h">{"< 3 h"}</SelectItem>
-          <SelectItem value="3-5h">3–5 h</SelectItem>
-          <SelectItem value="5-10h">5–10 h</SelectItem>
-          <SelectItem value="mais-10h">{"> 10 h"}</SelectItem>
+          <SelectItem value="menos que 3 horas">{"< 3 h"}</SelectItem>
+          <SelectItem value="de 3 a 5 horas">3–5 h</SelectItem>
+          <SelectItem value="de 5 a 10 horas">5–10 h</SelectItem>
+          <SelectItem value="mais de 10 horas">{"> 10 h"}</SelectItem>
         </SelectContent>
       </Select>
     </div>
