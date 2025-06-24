@@ -16,9 +16,7 @@ export async function getJornadasByUserId() {
 
 export async function newJornada(data: NewJornadaDataDto) {
   return api
-    .post("/jornadas/criarJornada", {
-      data,
-    })
+    .post("/jornadas/criarJornada", data)
     .then(() => toast.success("Jornada criada com sucesso!"))
     .catch((error: AxiosError<ApiError>) => {
       console.error("Erro ao adicionar uma nova jornada", error.response?.data);

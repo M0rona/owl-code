@@ -24,8 +24,6 @@ export function Roadmap({
     setLoadingMap
   );
 
-  console.log(loadingMap);
-
   return (
     <section className="flex-1">
       <ReactFlow

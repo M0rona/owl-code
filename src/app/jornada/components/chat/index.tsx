@@ -46,7 +46,13 @@ export function ChatJornada() {
     await tirarDuvidasGpt(idJornada, pergunta)
       .then((response) => {
         if (response)
-          setConversa((conversas) => [...conversas, response.resposta]);
+          setConversa((prevConversas) => [...prevConversas, response.resposta]);
+      })
+      .catch(() => {
+        if (textAreaRef.current) {
+          setConversa((prevConversa) => prevConversa.slice(0, -1));
+          textAreaRef.current.value = pergunta;
+        }
       })
       .finally(() => setIsLoading(false));
   }

@@ -12,5 +12,6 @@ export async function tirarDuvidasGpt(jornadaId: string, pergunta: string) {
     .catch((error: AxiosError<ApiError>) => {
       console.error("Erro em enviar a duvida", error.response?.data);
       toast.error(error.response?.data?.message || "Erro ao enviar a duvida");
+      throw error;
     });
 }
