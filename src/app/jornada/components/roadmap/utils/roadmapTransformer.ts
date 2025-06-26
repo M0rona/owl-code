@@ -57,6 +57,8 @@ export function transformRoadmapData(
               modulo.uid,
               sub.uid
             ),
+          moduloId: modulo.uid,
+          subId: sub.uid,
         },
         position: { x: 450, y: yBase + 50 + j * 100 },
       });

@@ -59,6 +59,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      prismjs:
+        specifier: ^1.30.0
+        version: 1.30.0
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -68,6 +71,9 @@ importers:
       react-router-dom:
         specifier: ^7.5.1
         version: 7.5.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react-simple-code-editor:
+        specifier: ^0.14.1
+        version: 0.14.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-syntax-highlighter:
         specifier: ^15.6.1
         version: 15.6.1(react@19.1.0)
@@ -90,6 +96,9 @@ importers:
       '@types/node':
         specifier: ^22.14.0
         version: 22.14.0
+      '@types/prismjs':
+        specifier: ^1.26.5
+        version: 1.26.5
       '@types/react':
         specifier: ^19.0.10
         version: 19.1.0
@@ -1281,6 +1290,9 @@ packages:
   '@types/node@22.14.0':
     resolution: {integrity: sha512-Kmpl+z84ILoG+3T/zQFyAJsU6EPTmOCj8/2+83fSN6djd6I4o7uOuGIH6vq3PrjY5BGitSbFuMN18j3iknubbA==}
 
+  '@types/prismjs@1.26.5':
+    resolution: {integrity: sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==}
+
   '@types/react-dom@19.1.2':
     resolution: {integrity: sha512-XGJkWF41Qq305SKWEILa1O8vzhb3aOo3ogBlSmiqNko/WmRb6QIaweuZCXjKygVDXpzXb5wyxKTSOsmkuqj+Qw==}
     peerDependencies:
@@ -2401,6 +2413,12 @@ packages:
     peerDependenciesMeta:
       react-dom:
         optional: true
+
+  react-simple-code-editor@0.14.1:
+    resolution: {integrity: sha512-BR5DtNRy+AswWJECyA17qhUDvrrCZ6zXOCfkQY5zSmb96BVUbpVAv03WpcjcwtCwiLbIANx3gebHOcXYn1EHow==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   react-style-singleton@2.2.3:
     resolution: {integrity: sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ==}
@@ -3887,6 +3905,8 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/prismjs@1.26.5': {}
+
   '@types/react-dom@19.1.2(@types/react@19.1.0)':
     dependencies:
       '@types/react': 19.1.0
@@ -5095,6 +5115,11 @@ snapshots:
       set-cookie-parser: 2.7.1
       turbo-stream: 2.4.0
     optionalDependencies:
+      react-dom: 19.1.0(react@19.1.0)
+
+  react-simple-code-editor@0.14.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
   react-style-singleton@2.2.3(@types/react@19.1.0)(react@19.1.0):

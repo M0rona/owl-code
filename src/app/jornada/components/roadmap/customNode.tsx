@@ -11,6 +11,8 @@ export interface CustomNodeData extends Node {
   isLoading?: boolean;
   onCheck?: (checked: boolean) => void;
   subNodeContent?: Subtopico;
+  moduloId: number;
+  subId: number;
 }
 
 export function CustomNode({ data }: { data: CustomNodeData }) {
@@ -43,6 +45,8 @@ export function CustomNode({ data }: { data: CustomNodeData }) {
         <DetalhesSubtopico
           subNodeContent={data.subNodeContent}
           sigla={data.sigla}
+          moduloId={data.moduloId}
+          subId={data.subId}
         >
           <div className="h-full p-5 pl-0">
             <span style={{ fontWeight: 600, whiteSpace: "pre-line" }}>
